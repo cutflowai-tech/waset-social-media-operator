@@ -1,6 +1,6 @@
 # Weekly planning rules
 
-Use a Saturday–Friday Cairo-local week unless the operator specifies another range; show exact dates. For a partly elapsed week preserve actual publications and approved future slots, and plan only the remaining slots. The quota is 21 Stories (3 per day) and 4 Posts on four distinct days, not a promise of automatic publishing.
+Use a Saturday–Friday Cairo-local week unless the operator specifies another range; show exact dates. For a partly elapsed week preserve actual publications and approved future slots, and plan only the remaining slots. The quota is 21 Stories (3 per day) and 4 Posts on four distinct days, automatic publishing requires the separately activated Team publisher and employee Ready approval; a plan alone never authorizes publication.
 
 Read all relevant board pages and available Instagram publication history. Identify the same asset through source project/code plus confirmed file/version and post records; do not count differently named copies as new videos. Treat uncertain duplicates as review items. Exclude Published, Cancelled and confirmed already-published assets. Keep already-approved future reservations; do not allocate the same item or asset twice. Respect the recorded Post/Story format. Select Ready to Publish first; place In Progress or New content only as provisional preparation assignments, never claim it is ready. Blocked items are not committed slots.
 

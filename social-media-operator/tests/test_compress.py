@@ -44,6 +44,18 @@ class CompressionTests(unittest.TestCase):
         with patch.object(c,'encode',side_effect=fake_encode):
             row=c.process(p,self.out,150000,130000)
         self.assertEqual(len(calls),2);self.assertEqual(row['status'],'failed');self.assertLess(calls[1],calls[0]);self.assertFalse(list(self.out.glob('*.mp4')))
+    def test_story_profile_real_100mb_boundary(self):
+        p=self.root/'ستوري.avi'
+        ff('-f','lavfi','-i','testsrc2=size=1080x1920:rate=30:duration=2','-c:v','rawvideo','-pix_fmt','yuv420p',p)
+        self.assertGreaterEqual(p.stat().st_size,100_000_000)
+        before=hashlib.sha256(p.read_bytes()).hexdigest()
+        row=c.process(p,self.out,*c.PROFILES['story'])
+        self.assertEqual(row['status'],'compressed',row)
+        self.assertLess(row['after_bytes'],100_000_000)
+        self.assertEqual(row['dimensions'],'1080×1920')
+        self.assertEqual(hashlib.sha256(p.read_bytes()).hexdigest(),before)
+        self.assertLessEqual(c.bitrate({'duration':3,'audio':1},290_000_000),25_000_000)
+
     def test_real_300mb_boundary(self):
         p=self.root/'large1080.avi'
         ff('-f','lavfi','-i','testsrc2=size=1920x1080:rate=30:duration=4','-c:v','rawvideo','-pix_fmt','yuv420p',p)
