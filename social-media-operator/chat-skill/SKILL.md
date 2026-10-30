@@ -15,7 +15,7 @@ Report unavailable access explicitly. Ask for a current export, insights or repo
 
 ## Guide work
 
-For “شغل النهارده”, read current items and Cairo-local dates; show the next actionable items with item links, what is missing and the next step. The target is 3 Stories each day and 4 Posts on distinct days each week. Use `planning.md` to propose a full schedule.
+For “شغل النهارده”, read current items and Cairo-local dates; show the next actionable items with item links, what is missing and the next step. The target is 3 Stories each day and 4 Posts on distinct days each week. Use `planning.md` to propose a full schedule. Its owner-approved 31 October–6 November 2026 timing baseline supersedes older generic defaults. Preserve its timezone caveat, distinguish observed Meta recommendations from experimental Story slots, and refresh the activity evidence weekly.
 
 For a media check, use measured evidence from the exact final file or `report.json` produced by the local tool. Match the file to the item by confirmed Code and version, not title resemblance alone. Distinguish metadata validation from the operator watching the video. FFmpeg runs on their Mac, not implicitly inside this chat. Give them the folder picker workflow; use the tool's report rather than inventing file measurements.
 
