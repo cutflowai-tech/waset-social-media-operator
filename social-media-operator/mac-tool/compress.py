@@ -7,6 +7,7 @@ from pathlib import Path
 
 LIMIT = 300_000_000
 TARGET = 290_000_000
+PROFILES = {'post': (LIMIT, TARGET), 'story': (100_000_000, 95_000_000)}
 EXTENSIONS = {'.mp4', '.mov', '.m4v', '.mkv', '.avi', '.webm', '.mxf'}
 
 def run(args):
@@ -44,16 +45,16 @@ def bitrate(info, target):
     rate = int(target * 8 * .98 / info['duration'] - 128000 * info['audio'])
     if rate < 250000:
         raise ValueError('الفيديو طويل جدًا للضغط الآمن بهذا الحد؛ ارجع للمدير.')
-    return rate
+    return min(rate, 24_000_000)
 
 def encode(source, output, info, rate, log):
     common = ['ffmpeg', '-nostdin', '-hide_banner', '-loglevel', 'error', '-xerror', '-y', '-i', source,
               '-map', f"0:{info['index']}", '-c:v', 'libx264', '-preset', 'medium', '-threads', '2',
-              '-b:v', str(rate), '-pix_fmt', 'yuv420p', '-fps_mode', 'passthrough',
+              '-b:v', str(rate), '-maxrate', '25M', '-bufsize', '25M', '-pix_fmt', 'yuv420p', '-fps_mode', 'passthrough',
               '-passlogfile', log]
     run(common + ['-pass', '1', '-an', '-f', 'null', os.devnull])
-    run(common + ['-map', '0:a?', '-c:a', 'aac', '-b:a', '128k', '-pass', '2',
-                  '-movflags', '+faststart', '-metadata:s:v:0', 'rotate=0', output])
+    run(common + ['-map', '0:a?', '-c:a', 'aac', '-b:a', '128k', '-ar', '48000', '-pass', '2',
+                  '-movflags', '+faststart', '-use_editlist', '0', '-metadata:s:v:0', 'rotate=0', output])
 
 def verify(source_info, output, limit):
     if output.stat().st_size >= limit:
@@ -132,10 +133,17 @@ def main():
     parser = argparse.ArgumentParser(description='ضغط مجموعة فيديوهات لأقل من 300 MB مع الحفاظ على الأصل')
     parser.add_argument('folder', nargs='?', type=Path)
     parser.add_argument('--choose', action='store_true')
+    parser.add_argument('--profile', choices=PROFILES)
     args = parser.parse_args()
     for binary in ('ffmpeg', 'ffprobe'):
         if not shutil.which(binary):
             raise SystemExit('شغّل Setup.command أولًا لتثبيت FFmpeg.')
+    if args.choose and not args.profile:
+        selected = subprocess.run(['osascript', '-e', 'choose from list {"Post — 290 MB", "Story — 95 MB"} with prompt "اختار نوع الفيديوهات في الفولدر" default items {"Post — 290 MB"}'], capture_output=True, text=True)
+        if selected.returncode or selected.stdout.strip() == 'false': return 0
+        args.profile = 'story' if selected.stdout.startswith('Story') else 'post'
+    limit, target = PROFILES[args.profile or 'post']
+    print(f"Profile: {args.profile or 'post'}; limit < {limit:,} bytes; target {target:,} bytes")
     if args.choose:
         p = subprocess.run(['osascript', '-e', 'POSIX path of (choose folder with prompt "اختار فولدر الفيديوهات بعد Topaz")'], capture_output=True, text=True)
         if p.returncode: return 0
@@ -152,7 +160,9 @@ def main():
     try:
         for index, source in enumerate(sources, 1):
             print(f'[{index}/{len(sources)}] {source.name}', flush=True)
-            rows.append(process(source, destination))
+            row = process(source, destination, limit=limit, target=target)
+            row['note'] = f"{args.profile or 'post'}: target {target:,}, limit < {limit:,}. " + row['note']
+            rows.append(row)
             reports(rows, destination)
             print(rows[-1]['status'], flush=True)
     except KeyboardInterrupt:
