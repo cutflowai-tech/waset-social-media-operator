@@ -8,7 +8,19 @@ Vary projects, client/code families and themes across each day when the inventor
 
 Use verified audience activity and comparable historical content performance; state account, date range, timezone and metrics actually available. Do not compare raw Story views to Post reach as if identical. Prefer the four best-supported distinct Post days and spread three Story slots over the day. Do not promise that posting at a time guarantees results.
 
-If timing analytics are missing, propose Saturday/Monday/Wednesday/Friday at 19:00 for Posts and 12:00/17:00/21:00 for Stories, Africa/Cairo. Label these experimental defaults, not observed best times, and request operator confirmation. Re-evaluate after two weeks using available reach, engagement and Story completion/exit data; unavailable metrics remain unavailable. Do not infer a foreign audience's timezone from property addresses.
+## Owner-approved timing baseline — reviewed 30 October 2026
+
+For the week 31 October–6 November 2026, use these Post slots: Saturday 31 October 17:00; Monday 2 November 19:00; Thursday 5 November 18:00; Friday 6 November 14:00. The owner approved this proposed schedule, not selection of specific board items or automatic publication. Confirm the concrete item plan before recording Publish At.
+
+Evidence: Instagram Active times in Meta Business Suite showed Saturday 31 October 17:00, Monday 2 November 19:00 and Friday 6 November 14:00; the Planner separately recommended Thursday 5 November 18:00. The tooltip said recommendations use follower activity during the last seven days. These are observed activity recommendations, not measured guarantees of engagement and not a complete hourly activity chart.
+
+Timezone caveat: the UI did not explicitly display its timezone name. The 26 October publication appeared at 18:33, matching Cairo for its API timestamp 15:33 UTC; its CSV time was 08:33. Cairo equivalence is strongly supported but not explicitly verified in settings. Use the owner-approved Cairo operational baseline above while retaining this caveat; never add a fixed ten-hour offset to all CSV rows. Verify timezone and date-specific DST when refreshing source data, and reconcile any discrepancy before board writes.
+
+Stories: experimental Cairo baseline 14:00, 18:00, 21:00 daily; replace the middle slot with 17:00 on Saturday and 19:00 on Monday. This gives 21 Stories per week. These three daily times are an operational experiment, not three observed Meta peaks. Post and Story may share a time; preserve asset deduplication rules.
+
+Recheck Meta Active times weekly. After 6 November these dated Post recommendations expire as current evidence: if fresh analytics are unavailable, explicitly propose Saturday 17:00, Monday 19:00, Thursday 18:00 and Friday 14:00 as a continuation experiment, with the same Story baseline, and obtain approval for that week. Do not present an old seven-day observation as live analytics. If fresh evidence changes a slot, show the change and get confirmation before writing.
+
+Review Story results after 24 hours and Reel results after 48 hours and seven days. After two weeks assess available reach, saves, shares and engagement using comparable content ages; completion/exit metrics remain unavailable unless actually supplied. Do not infer a foreign audience's timezone from property addresses.
 
 Show a table with date, Cairo-local time, format, project/code, item link, readiness and preparation required. Reconcile totals explicitly: 3 Stories on each date; 4 Posts across 4 dates; unique assets; no conflict with preserved reservations. A shortage must state exact counts and open slots. The operator can approve a feasible partial plan; leave unavailable slots unassigned.
 
